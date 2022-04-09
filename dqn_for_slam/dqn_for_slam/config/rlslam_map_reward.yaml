@@ -21,7 +21,7 @@ rlslam:
   scan_min_distance: 0.2
   training_image_size: 8
   crash_distance: 0.21
-  map_completed_threshold: 350
+  map_completed_threshold: 300
   reward_map_completed: 10.
   reward_crashed: -5.
 

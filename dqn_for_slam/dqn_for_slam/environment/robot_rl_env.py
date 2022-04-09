@@ -80,7 +80,7 @@ class RobotEnv(gym.Env):
         self.occupancy_grid = None
         self.done = False
         self.steps_in_episode = 0
-        self.min_distance = 100
+        self.min_distance = 100 #see
         self.reward = None
         self.reward_in_episode = 0
         self.now_action = -1
