@@ -29,8 +29,8 @@ import robot_rl_env
 from DQN import DQNAgent
 
 # Environment settings
-EPISODES = 500
-MAX_STEP_IN_ESISODE = 200
+EPISODES = 100
+MAX_STEP_IN_ESISODE = 100
 
 
 ENV_NAME = "RobotEnv-v0"
@@ -38,18 +38,18 @@ DISCOUNT = 0.99
 REPLAY_MEMORY_SIZE = 1000  # How many last steps to keep for model training
 MIN_REPLAY_MEMORY_SIZE = 100  # Minimum number of steps in a memory to start training
 MINIBATCH_SIZE = 64  # How many steps (samples) to use for training
-UPDATE_TARGET_EVERY = 5  # Terminal states (end of episodes)
+UPDATE_TARGET_EVERY = 1  # Terminal states (end of episodes)
 MODEL_NAME = "2x256"
-MIN_REWARD = 100  # For model save
+MIN_REWARD = 50  # For model save
 MEMORY_FRACTION = 0.20
 
 for i in range(100):
     print("check")
 
 # Exploration settings
-epsilon = 1  # not a constant, going to be decayed
-EPSILON_DECAY = 0.99975
-MIN_EPSILON = 0.001
+epsilon = 0.6  # not a constant, going to be decayed
+EPSILON_DECAY = 0.9997
+MIN_EPSILON = 0.1
 
 #  Stats settings
 AGGREGATE_STATS_EVERY = 50  # episodes

@@ -2,6 +2,7 @@ import tensorflow as tf
 from matplotlib.pyplot import step
 import numpy as np
 from tensorflow.keras.models import Sequential
+from tensorflow.keras import regularizers
 from tensorflow.keras.layers import (
     Dense,
     Dropout,
@@ -22,11 +23,11 @@ import cv2
 
 ENV_NAME = "RobotEnv-v0"
 DISCOUNT = 0.99
-REPLAY_MEMORY_SIZE = 50000  # How many last steps to keep for model training
+REPLAY_MEMORY_SIZE = 100000  # How many last steps to keep for model training
 MIN_REPLAY_MEMORY_SIZE = 1000  # Minimum number of steps in a memory to start training
 MINIBATCH_SIZE = 64  # How many steps (samples) to use for training
 UPDATE_TARGET_EVERY = 5  # Terminal states (end of episodes)
-MODEL_NAME = "2x256"
+MODEL_NAME = "2x512"
 MIN_REWARD = -200  # For model save
 MEMORY_FRACTION = 0.20
 # Own Tensorboard class
@@ -91,13 +92,14 @@ class DQNAgent:
 
         model = tf.keras.Sequential()
         model.add(Flatten(input_shape=(1,) + self.env.observation_space.shape))
-        model.add(Dense(512, activation="relu"))
-        model.add(Dense(512, activation="relu"))
+        model.add(Dense(512, activation="relu",kernel_regularizer=regularizers.l2(0.01)))
+        model.add(Dense(512, activation="relu",kernel_regularizer=regularizers.l2(0.01)))
+        model.add(Dense(512, activation="relu",kernel_regularizer=regularizers.l2(0.01)))
         model.add(
             Dense(self.env.action_space.n, activation="linear")
         )  # ACTION_SPACE_SIZE = how many choices (9)
         print(model.summary())
-        model.compile(loss="mse", optimizer=Adam(lr=0.001), metrics=["accuracy"])
+        model.compile(loss="mse", optimizer=Adam(lr=0.0001), metrics=["accuracy"])
 
         return model
 
