@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 # -*- coding: utf-8 -*-
 """cartpole_a2c_online.ipynb
 
@@ -56,7 +55,7 @@ class Critic(nn.Module):
 
 env = gym.make("RobotEnv-v0")
 num_steps = 120
-max_episodes = 200
+max_episodes = 1000
 # config
 state_dim = env.observation_space.shape[0]
 n_actions = env.action_space.n
@@ -102,8 +101,8 @@ for i in range(max_episodes):
             break
     
     if i % 100 == 0:
-        torch.save(actor.state_dict(), "models/actor_world_{0}_episode_{1}".format(1,i))
-        torch.save(critic.state_dict(), "models/critic_world_{0}_episode_{1}".format(1,i))
+        torch.save(actor.state_dict(), "models/actor_world_{0}_episode_{1}".format(5,i))
+        torch.save(critic.state_dict(), "models/critic_world_{0}_episode_{1}".format(5,i))
         np.save("map", map_completeness)
         np.save("reward", episode_rewards)
 

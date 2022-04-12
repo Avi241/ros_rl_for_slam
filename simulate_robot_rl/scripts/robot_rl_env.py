@@ -3,7 +3,7 @@ from typing import Tuple
 import logging
 import time
 import os
-from std_msgs.msg import String
+
 import gym
 from gym import spaces
 import numpy as np
@@ -18,10 +18,9 @@ from gazebo_msgs.msg import ModelState
 from sensor_msgs.msg import LaserScan
 from std_srvs.srv import Empty
 from robot_localization.srv import SetPose
+from std_msgs.msg import String
 
 from gym.envs.registration import register
-
-pub = rospy.Publisher('map_data', String, queue_size=10)
 
 register(
     id='RobotEnv-v0',
@@ -29,6 +28,7 @@ register(
     entry_point='robot_rl_env:RobotEnv'
 )
 
+pub = rospy.Publisher('map_data', String, queue_size=10)
 
 
 file_path = __file__
