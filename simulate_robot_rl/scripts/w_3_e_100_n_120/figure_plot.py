@@ -11,9 +11,9 @@ import matplotlib.pyplot as plt
 
 reward = np.load('reward.npy')
 map = np.load('map.npy')
-map = moving_average(map,100)
-reward = moving_average(reward,100)
-
+map = moving_average(map,20)
+reward = moving_average(reward,30)
+# print(max(map))
 fig = plt.figure()
 plt.plot(map)
 plt.xlabel("episdoes")

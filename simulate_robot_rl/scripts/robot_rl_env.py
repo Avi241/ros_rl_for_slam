@@ -3,7 +3,7 @@ from typing import Tuple
 import logging
 import time
 import os
-
+from std_msgs.msg import String
 import gym
 from gym import spaces
 import numpy as np
@@ -20,6 +20,8 @@ from std_srvs.srv import Empty
 from robot_localization.srv import SetPose
 
 from gym.envs.registration import register
+
+pub = rospy.Publisher('map_data', String, queue_size=10)
 
 register(
     id='RobotEnv-v0',
@@ -420,15 +422,15 @@ class RobotEnv(gym.Env):
         
         if self.map_completeness_pct > MAP_COMPLETENESS_THRESHOLD:
             self.reward = REWARD_MAP_COMPLETED
-            # self.done = True
+            self.done = True
             state = 'comp'
         elif self.min_distance < COLLISION_THRESHOLD:
             self.crash_count += 1
             # Robot likely hit the wall
             self.reward = REWARD_CRASHED
             state = 'crashed'
-            # if self.crash_count > CRASH_COUNT_THRESH:
-            #     self.done = True
+            if self.crash_count > CRASH_COUNT_THRESH:
+                self.done = True
         else:
             self.reward = self.map_completeness_pct - self.last_map_completeness_pct
             state = ''
@@ -463,7 +465,8 @@ class RobotEnv(gym.Env):
         
         self.last_map_completeness_pct = self.map_completeness_pct
         # self.map_completeness_pct = ((num_occupied + num_unoccupied) * 100 / sum_grid) / self.map_size_ratio
-        self.map_completeness_pct = 1000*((num_occupied + num_unoccupied)/ sum_grid) 
+        self.map_completeness_pct = 1000*((num_occupied + num_unoccupied)/ 122880) 
+        pub.publish("last_comp={0}, current_comp={1} ,sum_grid={2} ".format(self.last_map_completeness_pct,self.map_completeness_pct,sum_grid))
         if self.steps_in_episode == 1:
             self.last_map_completeness_pct = self.map_completeness_pct
 

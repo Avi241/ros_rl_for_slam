@@ -1,7 +1,7 @@
 rlslam:
   
-  steps_in_episode: 200
-  crash_count_thresh: 40
+  steps_in_episode: 120
+  crash_count_thresh: 30
   
   initial_posx: 0.0
   initial_posy: 0.0
@@ -22,9 +22,9 @@ rlslam:
   scan_min_distance: 0.2
   training_image_size: 8
   crash_distance: 0.14
-  map_completed_threshold: 106.6 # test-world-245, world-1 = 10.6632 ,w-2=10.633, w-5 = 11.652 , w-4= 10.438
-  reward_map_completed: 100.
-  reward_crashed: -2.
+  map_completed_threshold: 98.6 # test-world-245, world-1 = 10.6632 ,w-2=10.633, w-5 = 11.652 , w-4= 10.438
+  reward_map_completed: 20.
+  reward_crashed: -5.
 
   steering: 0.6
   throttle: 0.4

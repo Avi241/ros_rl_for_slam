@@ -30,21 +30,21 @@ from DQN import DQNAgent
 
 # Environment settings
 EPISODES = 100
-MAX_STEP_IN_ESISODE = 100
+MAX_STEP_IN_ESISODE = 150
 
 
 ENV_NAME = "RobotEnv-v0"
 DISCOUNT = 0.99
-REPLAY_MEMORY_SIZE = 1000  # How many last steps to keep for model training
-MIN_REPLAY_MEMORY_SIZE = 100  # Minimum number of steps in a memory to start training
+REPLAY_MEMORY_SIZE = 100000  # How many last steps to keep for model training
+MIN_REPLAY_MEMORY_SIZE = 1000  # Minimum number of steps in a memory to start training
 MINIBATCH_SIZE = 64  # How many steps (samples) to use for training
-UPDATE_TARGET_EVERY = 1  # Terminal states (end of episodes)
+UPDATE_TARGET_EVERY = 5  # Terminal states (end of episodes)
 MODEL_NAME = "2x256"
 MIN_REWARD = 50  # For model save
 MEMORY_FRACTION = 0.20
 
-for i in range(100):
-    print("check")
+#for i in range(100):
+#    print("check")
 
 # Exploration settings
 epsilon = 0.6  # not a constant, going to be decayed
@@ -157,7 +157,7 @@ if __name__ == "__main__":
             )
 
             # Save model, but only when min reward is greater or equal a set value
-            if average_reward >= MIN_REWARD:
+            if episode % 100 == 0:
                 agent.model.save(
                     f"models/{MODEL_NAME}__{max_reward:_>7.2f}max_{average_reward:_>7.2f}avg_{min_reward:_>7.2f}min__{int(time.time())}.model"
                 )
@@ -167,6 +167,8 @@ if __name__ == "__main__":
             epsilon *= EPSILON_DECAY
             epsilon = max(MIN_EPSILON, epsilon)
         pub.publish("episode={0}, map_com={1} ,reward={2} ".format(episode,new_state[13],episode_reward))
+        np.save("map", map_completeness)
+        np.save("reward", ep_rewards)
         # for i in range(10000):
         #     print("done with episode")
 
