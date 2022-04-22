@@ -21,7 +21,7 @@ BUFFER_SIZE = int(1e5)  #replay buffer size
 BATCH_SIZE = 64         # minibatch size
 GAMMA = 0.99            # discount factor
 TAU = 1e-3              # for soft update of target parameters
-LR = 5e-4               # learning rate
+LR = 1e-3               # learning rate
 UPDATE_EVERY = 4        # how often to update the network
 
 # device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -212,11 +212,11 @@ env = gym.make("RobotEnv-v0")
 state_dim = env.observation_space.shape[0]
 n_actions = env.action_space.n
 agent = Agent(state_size=state_dim,action_size=n_actions,seed=0)
-num_steps = 120
-max_episodes = 1000
+num_steps = 200
+max_episodes = 200000
 
-def dqn(n_episodes= max_episodes, max_t = num_steps, eps_start=1.0, eps_end = 0.01,
-       eps_decay=0.996):
+def dqn(n_episodes= max_episodes, max_t = num_steps, eps_start=0.7, eps_end = 0.1,
+       eps_decay=0.997):
     """Deep Q-Learning
     
     Params

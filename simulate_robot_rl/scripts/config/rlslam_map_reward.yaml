@@ -21,13 +21,13 @@ rlslam:
   scan_max_distance: 4.0
   scan_min_distance: 0.2
   training_image_size: 8
-  crash_distance: 0.14
-  map_completed_threshold: 98.6 # test-world-245, world-1 = 10.6632 ,w-2=10.633, w-5 = 11.652 , w-4= 10.438
+  crash_distance: 0.2
+  map_completed_threshold: 74 # test-world-75.4(123904), world-1 = 10.6632 ,w-2=10.633, w-5 = 11.652 , w-4= 10.438(122880)
   reward_map_completed: 20.
   reward_crashed: -5.
 
-  steering: 0.6
-  throttle: 0.4
+  steering: 0.8
+  throttle: 0.2
 
   timeout: 5.0
   sleep_reset_time: 1.0
