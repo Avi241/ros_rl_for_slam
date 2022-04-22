@@ -22,7 +22,7 @@ rlslam:
   scan_min_distance: 0.2
   training_image_size: 8
   crash_distance: 0.2
-  map_completed_threshold: 74 # test-world-75.4(123904), world-1 = 10.6632 ,w-2=10.633, w-5 = 11.652 , w-4= 10.438(122880)
+  map_completed_threshold: 72 # test-world-74.86(123904), world-1 = 10.6632 ,w-2=10.633, w-5 = 11.652 , w-4= 10.438(122880)
   reward_map_completed: 20.
   reward_crashed: -5.
 

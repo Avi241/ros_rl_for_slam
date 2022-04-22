@@ -465,7 +465,7 @@ class RobotEnv(gym.Env):
         
         self.last_map_completeness_pct = self.map_completeness_pct
         # self.map_completeness_pct = ((num_occupied + num_unoccupied) * 100 / sum_grid) / self.map_size_ratio
-        self.map_completeness_pct = 1000*((num_occupied + num_unoccupied)/ 122880) 
+        self.map_completeness_pct = 1000*((num_occupied + num_unoccupied)/ 123904) 
         pub.publish("last_comp={0}, current_comp={1} ,sum_grid={2} ".format(self.last_map_completeness_pct,self.map_completeness_pct,sum_grid))
         if self.steps_in_episode == 1:
             self.last_map_completeness_pct = self.map_completeness_pct
